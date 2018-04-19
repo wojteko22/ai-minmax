@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  Arr = Array;
-  sideSize = 4;
+  side = Array(4);
 }
