@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {TurnService} from './turn.service';
+import {NewTurn} from './new-turn';
 
 @Component({
   selector: 'app-board',
@@ -22,8 +23,9 @@ export class BoardComponent implements OnChanges {
     }
   }
 
-  playTurn(row: Array<boolean>, index: number) {
-    row[index] = true;
-    this.turnService.sendTurn();
+  playTurn(rowIndex: number, columnIndex: number) {
+    this.board[rowIndex][columnIndex] = true;
+    const data = new NewTurn(this.board, rowIndex, columnIndex);
+    this.turnService.sendTurn(data);
   }
 }
