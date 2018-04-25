@@ -26,6 +26,6 @@ export class BoardComponent implements OnChanges {
   playTurn(rowIndex: number, columnIndex: number) {
     this.board[rowIndex][columnIndex] = true;
     const data = new NewTurn(this.board, rowIndex, columnIndex);
-    this.turnService.sendTurn(data);
+    this.turnService.sendTurn(data).subscribe(result => console.log(result));
   }
 }

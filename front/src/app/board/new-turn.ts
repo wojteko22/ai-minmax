@@ -1,4 +1,4 @@
 export class NewTurn {
-  constructor(board: Array<Array<boolean>>, rowIndex: number, columnIndex: number) {
+  constructor(public board: Array<Array<boolean>>, public rowIndex: number, public columnIndex: number) {
   }
 }
