@@ -2,11 +2,10 @@
   <h1>
     Stratego
   </h1>
+  <mat-form-field>
+    <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSize">
+  </mat-form-field>
   <div *ngFor="let rowIndex of side">
     <button class="field" *ngFor="let columnIndex of side"></button>
   </div>
 </div>
-
-<mat-form-field>
-  <input matInput placeholder="Rozmiar boku" value="3">
-</mat-form-field>
