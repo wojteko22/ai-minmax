@@ -1,3 +1,4 @@
-<div *ngFor="let rowIndex of side">
-  <button class="field" *ngFor="let columnIndex of side"></button>
+<div *ngFor="let row of board">
+  <button *ngFor="let field of row, let columnIndex = index" [class.filled]="field" class="field"
+          (click)="playTurn(row, columnIndex)"></button>
 </div>
