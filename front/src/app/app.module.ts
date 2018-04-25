@@ -9,6 +9,7 @@ import {MatFormFieldModule, MatInputModule} from '@angular/material';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {BoardComponent} from './board/board.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {BoardComponent} from './board/board.component';
     BrowserModule,
 
     ReactiveFormsModule,
+    HttpClientModule,
 
     BrowserAnimationsModule,
     MatFormFieldModule,
