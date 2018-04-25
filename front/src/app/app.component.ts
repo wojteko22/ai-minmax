@@ -9,16 +9,16 @@ import {FormControl, Validators} from '@angular/forms';
 export class AppComponent {
   private validators = [Validators.required, Validators.min(2)];
 
-  sideSize = new FormControl(4, Validators.compose(this.validators));
-  side = Array(this.sideSize.value);
+  sideSizeControl = new FormControl(4, Validators.compose(this.validators));
+  sideSize = this.sideSizeControl.value;
 
   constructor() {
-    this.sideSize.valueChanges.subscribe(value => this.tryToUpdateSize(value));
+    this.sideSizeControl.valueChanges.subscribe(value => this.tryToUpdateSize(value));
   }
 
   private tryToUpdateSize(value: number) {
-    if (this.sideSize.valid) {
-      this.side = Array(value);
+    if (this.sideSizeControl.valid) {
+      this.sideSize = value;
     }
   }
 }

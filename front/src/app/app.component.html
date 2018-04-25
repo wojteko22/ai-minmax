@@ -3,9 +3,7 @@
     Stratego
   </h1>
   <mat-form-field>
-    <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSize">
+    <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSizeControl">
   </mat-form-field>
-  <div *ngFor="let rowIndex of side">
-    <button class="field" *ngFor="let columnIndex of side"></button>
-  </div>
+  <app-board [sideSize]="sideSize"></app-board>
 </div>
