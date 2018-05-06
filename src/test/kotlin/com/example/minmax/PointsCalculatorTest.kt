@@ -23,12 +23,19 @@ internal class PointsCalculatorTest {
         checkPoints(board)
     }
 
+    @Test
+    fun `getPoints() calculates diagonal points`() {
+        val board = listOf(
+                listOf(true, false),
+                listOf(false, true)
+        )
+        checkPoints(board)
+    }
+
     private fun checkPoints(board: List<List<Boolean>>) {
         val turn = NewTurn(board, 0, 0)
         val pointsCalculator = PointsCalculator(turn)
         val points = pointsCalculator.points
         assertThat(points).isEqualTo(2)
     }
-
-
 }
