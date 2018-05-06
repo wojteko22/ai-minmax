@@ -7,7 +7,7 @@ internal class PointsCalculatorTest {
     @org.junit.jupiter.api.Test
     fun getPoints() {
         val board = listOf(
-                listOf(false, true),
+                listOf(true, true),
                 listOf(false, false)
         )
         val turn = NewTurn(board, 0, 0)

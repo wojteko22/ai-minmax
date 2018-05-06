@@ -1,37 +1,22 @@
 package com.example.minmax
 
-class PointsCalculator(private val data: NewTurn) {
+class PointsCalculator(data: NewTurn) {
+
+    private val row = data.board[data.rowIndex]
 
     val points: Int
+        get() = horizontalPoints //+ checkVertical() + checkUpperLeftDiagonal() + checkUpperRightDiagonal()
+
+
+    private val horizontalPoints: Int
         get() {
-            return checkHorizontal() //+ checkVertical() + checkUpperLeftDiagonal() + checkUpperRightDiagonal()
+            var visited = 0
+            for (column in 0 until row.size) {
+                if (!row[column]) {
+                    return 0
+                }
+                visited++
+            }
+            return visited
         }
-
-    private fun checkHorizontal(): Int {
-        return checkPrevious() + 1 + checkNext()
-    }
-
-    private fun checkNext(): Int {
-        val row = data.board[data.rowIndex]
-        val currentColumn = data.columnIndex
-        var visited = 0
-        for (column in (currentColumn + 1) until row.size) {
-            visited++
-            if (!row[column])
-                return 0
-        }
-        return visited
-    }
-
-    private fun checkPrevious(): Int {
-        val row = data.board[data.rowIndex]
-        val currentColumn = data.columnIndex
-        var visited = 0
-        for (column in (currentColumn - 1) downTo 0) {
-            visited++
-            if (!row[column])
-                return 0
-        }
-        return visited
-    }
 }
