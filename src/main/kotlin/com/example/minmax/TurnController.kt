@@ -5,11 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class TurnController {
+class TurnController(private val service: TurnService) {
 
     @PostMapping
-    fun playNextTurn(@RequestBody data: NewTurn): Int {
-        println(data.board)
-        return 2
-    }
+    fun playNextTurn(@RequestBody data: NewTurn) = service.calculatePoints(data)
 }
