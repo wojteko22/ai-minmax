@@ -1,4 +1,4 @@
 <div *ngFor="let row of board, let rowIndex = index">
   <button *ngFor="let field of row, let columnIndex = index" [class.filled]="field" class="field"
-          (click)="onFieldClick(rowIndex, columnIndex)"></button>
+          (click)="onFieldClick(rowIndex, columnIndex)" [disabled]="field"></button>
 </div>
