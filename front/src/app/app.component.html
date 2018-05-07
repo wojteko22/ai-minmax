@@ -2,7 +2,16 @@
   <h1>
     Stratego
   </h1>
-  <p>Punkty: {{points}}</p>
+  <div class="playersBox" >
+    <div class="playerData">
+      <p>Gracz 1</p>
+      <p>Punkty: {{points}}</p>
+    </div>
+    <div class="playerData">
+      <p>Gracz 2</p>
+      <p>Punkty: {{points}}</p>
+    </div>
+  </div>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSizeControl">
   </mat-form-field>
