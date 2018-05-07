@@ -1,14 +1,12 @@
 package com.example.minmax
 
 class NewMove(
-        gameState: GameState,
+        private val gameState: GameState,
         val rowIndex: Int,
         val columnIndex: Int
 ) {
     val board = gameState.board
-    private val points = gameState.points
-    private val playerIndex = gameState.playerIndex
     val nextPlayerIndex = gameState.nextPlayerIndex
 
-    fun updatedPoints(turnPoints: Int) = points.updated(turnPoints, playerIndex)
+    fun updatedPoints(pointsGain: Int) = gameState.updatedPoints(pointsGain)
 }

@@ -12,18 +12,30 @@ class TurnService {
     }
 
     fun makeAutoMove(data: AutoMove): GameState? {
-        println(data.mode)
-        val board = data.board.map { it.toMutableList() }
+        val states = allAvailableStates(data)
+        return when (data.mode) {
+            "consecutive" -> states.firstOrNull()
+            "points" -> states.maxBy { it.points[data.playerIndex] }
+            else -> null
+        }
+    }
+
+    private fun allAvailableStates(data: AutoMove): List<GameState> {
+        val board = data.board
+        val states = mutableListOf<GameState>()
         for (rowIndex in 0 until board.size) {
             for (columnIndex in 0 until board.size) {
                 if (!board[rowIndex][columnIndex]) {
-                    board[rowIndex][columnIndex] = true
-                    val computerPoints = PointsCalculator(board, rowIndex, columnIndex).points
-                    val updatedPoints2 = data.points.updated(computerPoints, data.nextPlayerIndex)
-                    return GameState(board, updatedPoints2, data.nextPlayerIndex)
+                    val currentBoard = board.map { it.toMutableList() }
+                    currentBoard[rowIndex][columnIndex] = true
+                    val pointsGain = PointsCalculator(currentBoard, rowIndex, columnIndex).points
+                    val nextPlayerIndex = data.nextPlayerIndex
+                    val updatedPoints = data.updatedPoints(pointsGain)
+                    val gameState = GameState(currentBoard, updatedPoints, nextPlayerIndex)
+                    states += gameState
                 }
             }
         }
-        return null
+        return states
     }
 }
