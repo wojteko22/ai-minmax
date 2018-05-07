@@ -31,10 +31,43 @@ class PointsCalculator(data: NewTurn) {
             visited++
 
         }
+        if (visited < 1) {
+            return@lazy 0
+        }
         return@lazy visited + 1
     }
 
-    val points: Int = horizontalPoints + verticalPoints + diagonalPoints
+    private val secondDiagonalPoints by lazy {
+        var visited = 0
+        var currentRowIndex = rowIndex - 1
+        var currentColumnIndex = columnIndex + 1
+        val size = board.size
+        while (currentRowIndex > -1 && currentColumnIndex < size) {
+            if (!board[currentRowIndex][currentColumnIndex]) {
+                return@lazy 0
+            }
+            currentRowIndex--
+            currentColumnIndex++
+            visited++
+        }
+        currentRowIndex = rowIndex + 1
+        currentColumnIndex = columnIndex - 1
+        while (currentRowIndex < size && currentColumnIndex > -1) {
+            if (!board[currentRowIndex][currentColumnIndex]) {
+                return@lazy 0
+            }
+            currentRowIndex++
+            currentColumnIndex--
+            visited++
+        }
+        if (visited < 1) {
+            return@lazy 0
+        }
+        return@lazy visited + 1
+    }
+
+
+    val points: Int = horizontalPoints + verticalPoints + diagonalPoints + secondDiagonalPoints
 
     private val horizontalPoints: Int
         get() {
