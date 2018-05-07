@@ -2,10 +2,13 @@ package com.example.minmax
 
 class NewTurn(
         gameState: GameState,
-        val playerIndex: Int,
         val rowIndex: Int,
-        val columnIndex: Int
+        val columnIndex: Int,
+        val nextPlayerMode: String
 ) {
     val board = gameState.board
-    val points = gameState.points
+    private val points = gameState.points
+    val playerIndex = gameState.playerIndex
+
+    fun updatedPoints(turnPoints: Int) = points.updated(turnPoints, playerIndex)
 }

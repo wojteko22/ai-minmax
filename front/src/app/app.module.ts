@@ -8,14 +8,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
 
 import {ReactiveFormsModule} from '@angular/forms';
-import {BoardComponent} from './board/board.component';
 import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardComponent,
   ],
   imports: [
     BrowserModule,

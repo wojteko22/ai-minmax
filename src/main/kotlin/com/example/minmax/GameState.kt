@@ -1,3 +1,3 @@
 package com.example.minmax
 
-class GameState(val board: List<List<Boolean>>, val points: List<Int>)
+class GameState(val board: Board, val points: Points, val playerIndex: Int)

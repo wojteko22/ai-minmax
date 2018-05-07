@@ -1,10 +1,7 @@
 package com.example.minmax
 
-class PointsCalculator(data: NewTurn) {
+class PointsCalculator(private val board: Board, private val rowIndex: Int, private val columnIndex: Int) {
 
-    private val board = data.board
-    private val rowIndex = data.rowIndex
-    private val columnIndex = data.columnIndex
     private val row = board[rowIndex]
 
     private val horizontalPoints: Int by lazy {

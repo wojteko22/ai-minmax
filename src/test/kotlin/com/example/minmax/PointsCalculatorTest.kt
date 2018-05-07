@@ -51,9 +51,7 @@ internal class PointsCalculatorTest {
     }
 
     private fun checkPoints(board: List<List<Boolean>>, rowIndex: Int, columnIndex: Int, expectedPoints: Int) {
-        val gameState = GameState(board, 0)
-        val turn = NewTurn(gameState, rowIndex, columnIndex)
-        val pointsCalculator = PointsCalculator(turn)
+        val pointsCalculator = PointsCalculator(board, rowIndex, columnIndex)
         val points = pointsCalculator.points
         assertThat(points).isEqualTo(expectedPoints)
     }

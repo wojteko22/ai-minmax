@@ -17,5 +17,8 @@
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
-  <app-board [sideSize]="sideSize" (fieldClick)="onBoardFieldClick($event)"></app-board>
+  <div *ngFor="let row of board, let rowIndex = index">
+    <button *ngFor="let field of row, let columnIndex = index" [class.filled]="field" class="field"
+            (click)="onBoardFieldClick(rowIndex, columnIndex)" [disabled]="field"></button>
+  </div>
 </div>
