@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {NewTurn} from './board/new-turn';
+import {NewMove} from './board/new-move';
 import {GameState} from './board/game-state';
 import {TurnService} from './board/turn.service';
+import {AutoMove} from './board/auto-move';
 
 @Component({
   selector: 'app-root',
@@ -41,15 +42,19 @@ export class AppComponent {
   onBoardFieldClick(rowIndex: number, columnIndex: number) {
     this.board[rowIndex][columnIndex] = true;
     const gameState = new GameState(this.board, this.points, this.playerIndex);
-    const nextPlayerIndex = (this.playerIndex + 1) % 2;
-    const nextPlayerMode = this.selectedModes[nextPlayerIndex];
-    const data = new NewTurn(gameState, rowIndex, columnIndex, nextPlayerMode);
-    this.turnService.sendTurn(data).subscribe(gameState => this.updateState(gameState));
+    const data = new NewMove(gameState, rowIndex, columnIndex);
+    this.turnService.makeAMove(data).subscribe(gameState => this.updateState(gameState));
   }
 
   private updateState(gameState) {
     this.board = gameState.board;
     this.points = gameState.points;
     this.playerIndex = gameState.playerIndex;
+
+    const mode = this.selectedModes[this.playerIndex];
+    if (mode != this.allModes[0]) {
+      const moveData = new AutoMove(gameState, mode);
+      this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
+    }
   }
 }

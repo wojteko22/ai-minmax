@@ -1,11 +1,10 @@
 import {GameState} from './game-state';
 
-export class NewTurn {
+export class NewMove {
   constructor(
     public gameState: GameState,
     public rowIndex: number,
     public columnIndex: number,
-    public nextPlayerMode: string,
   ) {
   }
 }

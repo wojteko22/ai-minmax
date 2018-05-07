@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.RestController
 class TurnController(private val service: TurnService) {
 
     @PostMapping
-    fun playNextTurn(@RequestBody data: NewTurn) = service.newGameState(data)
+    fun makeMove(@RequestBody data: NewMove) = service.makeMove(data)
+
+    @PostMapping("/auto")
+    fun makeAutoMove(@RequestBody data: AutoMove) = service.makeAutoMove(data)
 }
