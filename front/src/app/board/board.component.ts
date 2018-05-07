@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {TurnService} from './turn.service';
 import {NewTurn} from './new-turn';
+import {GameState} from './game-state';
 
 @Component({
   selector: 'app-board',
@@ -25,7 +26,8 @@ export class BoardComponent implements OnChanges {
 
   playTurn(rowIndex: number, columnIndex: number) {
     this.board[rowIndex][columnIndex] = true;
-    const data = new NewTurn(this.board, rowIndex, columnIndex);
-    this.turnService.sendTurn(data).subscribe(result => console.log(result));
+    const gameState = new GameState(this.board, 0);
+    const data = new NewTurn(gameState, rowIndex, columnIndex);
+    this.turnService.sendTurn(data).subscribe(result => console.log(result.points));
   }
 }

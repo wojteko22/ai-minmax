@@ -5,5 +5,8 @@ import org.springframework.stereotype.Service
 @Service
 class TurnService {
 
-    fun calculatePoints(data: NewTurn) = PointsCalculator(data).points
+    fun newGameState(data: NewTurn): GameState {
+        val points = PointsCalculator(data).points
+        return GameState(data.board, points)
+    }
 }

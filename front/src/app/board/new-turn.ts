@@ -1,4 +1,6 @@
+import {GameState} from './game-state';
+
 export class NewTurn {
-  constructor(public board: Array<Array<boolean>>, public rowIndex: number, public columnIndex: number) {
+  constructor(public gameState: GameState, public rowIndex: number, public columnIndex: number) {
   }
 }
