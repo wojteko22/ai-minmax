@@ -3,13 +3,9 @@
     Stratego
   </h1>
   <div class="playersBox" >
-    <div class="playerData">
-      <p>Gracz 1</p>
-      <p>Punkty: {{points[0]}}</p>
-    </div>
-    <div class="playerData">
-      <p>Gracz 2</p>
-      <p>Punkty: {{points[1]}}</p>
+    <div *ngFor="let playerPoints of points, let index = index" class="playerData">
+      <p>Gracz {{index + 1}}</p>
+      <p>Punkty: {{playerPoints}}</p>
     </div>
   </div>
   <p>Ruch gracza nr {{playerIndex + 1}}</p>
