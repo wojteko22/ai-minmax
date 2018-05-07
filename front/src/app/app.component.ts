@@ -47,6 +47,9 @@ export class AppComponent {
   }
 
   private updateState(gameState) {
+    if (!gameState) {
+      return;
+    }
     this.board = gameState.board;
     this.points = gameState.points;
     this.playerIndex = gameState.playerIndex;

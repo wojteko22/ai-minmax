@@ -11,7 +11,7 @@ class TurnService {
         return GameState(data.board, updatedPoints, data.nextPlayerIndex)
     }
 
-    fun makeAutoMove(data: AutoMove): GameState {
+    fun makeAutoMove(data: AutoMove): GameState? {
         println(data.mode)
         val board = data.board.map { it.toMutableList() }
         for (rowIndex in 0 until board.size) {
@@ -24,6 +24,6 @@ class TurnService {
                 }
             }
         }
-        throw RuntimeException("The game ended")
+        return null
     }
 }
