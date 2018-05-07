@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service
 class TurnService {
 
     fun newGameState(data: NewTurn): GameState {
-        val points = PointsCalculator(data).points
-        return GameState(data.board, data.points + points)
+        val turnPoints = PointsCalculator(data).points
+        val updatedPoints = data.points.toMutableList().apply {
+            this[data.playerIndex] += turnPoints
+        }
+        return GameState(data.board, updatedPoints)
     }
 }

@@ -16,7 +16,8 @@ export class AppComponent {
 
   sideSizeControl = new FormControl(4, Validators.compose(this.validators));
   sideSize = this.sideSizeControl.value;
-  points = 0;
+  points = [0, 0];
+  private playerIndex = 0;
 
   constructor(private turnService: TurnService) {
     this.sideSizeControl.valueChanges.subscribe(value => this.tryToUpdateSize(value));
@@ -31,7 +32,8 @@ export class AppComponent {
   onBoardFieldClick(boardClick: BoardClick) {
     const {board, rowIndex, columnIndex} = boardClick;
     const gameState = new GameState(board, this.points);
-    const data = new NewTurn(gameState, rowIndex, columnIndex);
+    const data = new NewTurn(gameState, this.playerIndex, rowIndex, columnIndex);
     this.turnService.sendTurn(data).subscribe(gameState => this.points = gameState.points);
+    this.playerIndex = (this.playerIndex + 1) % 2;
   }
 }
