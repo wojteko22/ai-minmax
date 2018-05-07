@@ -11,7 +11,7 @@ internal class PointsCalculatorTest {
                 listOf(true, true),
                 listOf(false, false)
         )
-        checkPoints(board, 0, 0)
+        checkPoints(board, 0, 0, 2)
     }
 
     @Test
@@ -20,7 +20,7 @@ internal class PointsCalculatorTest {
                 listOf(true, false),
                 listOf(true, false)
         )
-        checkPoints(board, 0, 0)
+        checkPoints(board, 0, 0, 2)
     }
 
     @Test
@@ -29,7 +29,7 @@ internal class PointsCalculatorTest {
                 listOf(true, false),
                 listOf(false, true)
         )
-        checkPoints(board, 0, 0)
+        checkPoints(board, 0, 0, 2)
     }
 
     @Test
@@ -38,13 +38,22 @@ internal class PointsCalculatorTest {
                 listOf(false, true),
                 listOf(true, false)
         )
-        checkPoints(board, 0, 1)
+        checkPoints(board, 0, 1, 2)
     }
 
-    private fun checkPoints(board: List<List<Boolean>>, rowIndex: Int, columnIndex: Int) {
+    @Test
+    fun `getPoints() calculates all point`() {
+        val board = listOf(
+                listOf(true, true),
+                listOf(true, true)
+        )
+        checkPoints(board, 0, 0, 6)
+    }
+
+    private fun checkPoints(board: List<List<Boolean>>, rowIndex: Int, columnIndex: Int, expectedPoints: Int) {
         val turn = NewTurn(board, rowIndex, columnIndex)
         val pointsCalculator = PointsCalculator(turn)
         val points = pointsCalculator.points
-        assertThat(points).isEqualTo(2)
+        assertThat(points).isEqualTo(expectedPoints)
     }
 }
