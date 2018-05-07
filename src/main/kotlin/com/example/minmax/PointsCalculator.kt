@@ -7,6 +7,28 @@ class PointsCalculator(data: NewTurn) {
     private val columnIndex = data.columnIndex
     private val row = board[rowIndex]
 
+    private val horizontalPoints: Int by lazy {
+        var visited = 0
+        for (columnIndex in 0 until row.size) {
+            if (!row[columnIndex]) {
+                return@lazy 0
+            }
+            visited++
+        }
+        return@lazy visited
+    }
+
+    private val verticalPoints: Int by lazy {
+        var visited = 0
+        for (rowIndex in 0 until row.size) {
+            if (!board[rowIndex][columnIndex]) {
+                return@lazy 0
+            }
+            visited++
+        }
+        return@lazy visited
+    }
+
     private val diagonalPoints by lazy {
         var visited = 0
         var currentRowIndex = rowIndex - 1
@@ -66,30 +88,5 @@ class PointsCalculator(data: NewTurn) {
         return@lazy visited + 1
     }
 
-
     val points: Int = horizontalPoints + verticalPoints + diagonalPoints + secondDiagonalPoints
-
-    private val horizontalPoints: Int
-        get() {
-            var visited = 0
-            for (columnIndex in 0 until row.size) {
-                if (!row[columnIndex]) {
-                    return 0
-                }
-                visited++
-            }
-            return visited
-        }
-
-    private val verticalPoints: Int
-        get() {
-            var visited = 0
-            for (rowIndex in 0 until row.size) {
-                if (!board[rowIndex][columnIndex]) {
-                    return 0
-                }
-                visited++
-            }
-            return visited
-        }
 }
