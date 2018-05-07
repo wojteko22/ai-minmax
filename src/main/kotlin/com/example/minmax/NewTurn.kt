@@ -6,4 +6,5 @@ class NewTurn(
         val columnIndex: Int
 ) {
     val board = gameState.board
+    val points = gameState.points
 }

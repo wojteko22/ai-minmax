@@ -2,8 +2,9 @@
   <h1>
     Stratego
   </h1>
+  <p>Punkty: {{points}}</p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSizeControl">
   </mat-form-field>
-  <app-board [sideSize]="sideSize"></app-board>
+  <app-board [sideSize]="sideSize" (update)="onUpdateGameState($event)"></app-board>
 </div>

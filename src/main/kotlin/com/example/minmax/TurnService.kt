@@ -7,6 +7,6 @@ class TurnService {
 
     fun newGameState(data: NewTurn): GameState {
         val points = PointsCalculator(data).points
-        return GameState(data.board, points)
+        return GameState(data.board, data.points + points)
     }
 }
