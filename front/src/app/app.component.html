@@ -2,15 +2,20 @@
   <h1>
     Stratego
   </h1>
-  <div class="playersBox" >
+  <div class="playersBox">
     <div *ngFor="let playerPoints of points, let index = index" class="playerData">
-      <p>Gracz {{index + 1}}</p>
-      <p>Punkty: {{playerPoints}}</p>
+      <p>Player {{index + 1}}</p>
+      <p>Points: {{playerPoints}}</p>
+      <mat-form-field>
+        <mat-select placeholder="Mode" [(value)]="selectedModes[index]">
+          <mat-option *ngFor="let mode of allModes" [value]="mode">{{mode}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
-  <p>Ruch gracza nr {{playerIndex + 1}}</p>
+  <p>Turn of Player no. {{playerIndex + 1}}</p>
   <mat-form-field>
-    <input type="number" min="2" matInput placeholder="Rozmiar boku" [formControl]="sideSizeControl">
+    <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
   <app-board [sideSize]="sideSize" (fieldClick)="onBoardFieldClick($event)"></app-board>
 </div>
