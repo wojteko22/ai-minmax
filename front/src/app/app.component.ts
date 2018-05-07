@@ -17,7 +17,7 @@ export class AppComponent {
   sideSizeControl = new FormControl(4, Validators.compose(this.validators));
   sideSize = this.sideSizeControl.value;
   points = [0, 0];
-  private playerIndex = 0;
+  playerIndex = 0;
 
   constructor(private turnService: TurnService) {
     this.sideSizeControl.valueChanges.subscribe(value => this.tryToUpdateSize(value));
