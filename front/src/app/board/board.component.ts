@@ -9,7 +9,7 @@ import {BoardClick} from './board-click';
 export class BoardComponent implements OnChanges {
 
   @Input() sideSize: number;
-  @Output() update: EventEmitter<BoardClick> = new EventEmitter();
+  @Output() fieldClick: EventEmitter<BoardClick> = new EventEmitter();
   board: Array<Array<boolean>>;
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -19,9 +19,9 @@ export class BoardComponent implements OnChanges {
     }
   }
 
-  playTurn(rowIndex: number, columnIndex: number) {
+  onFieldClick(rowIndex: number, columnIndex: number) {
     this.board[rowIndex][columnIndex] = true;
     const boardClick = new BoardClick(this.board, rowIndex, columnIndex);
-    this.update.emit(boardClick);
+    this.fieldClick.emit(boardClick);
   }
 }

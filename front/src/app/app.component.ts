@@ -28,7 +28,7 @@ export class AppComponent {
     }
   }
 
-  onUpdateGameState(boardClick: BoardClick) {
+  onBoardFieldClick(boardClick: BoardClick) {
     const {board, rowIndex, columnIndex} = boardClick;
     const gameState = new GameState(board, this.points);
     const data = new NewTurn(gameState, rowIndex, columnIndex);
