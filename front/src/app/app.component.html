@@ -21,13 +21,13 @@
       </mat-form-field>
     </div>
   </div>
-  <button (click)="reset()">Reset</button>
-  <p>Turn of Player no. {{playerIndex + 1}} <button (click)="tryToMakeAutoMove()">Start</button></p>
+  <button (click)="reset()" [disabled]="computerTurn">Reset</button>
+  <p>Turn of Player no. {{playerIndex + 1}} <button (click)="tryToMakeAutoMove()" [disabled]="computerTurn">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
   <div *ngFor="let row of myGameState.board, let rowIndex = index">
     <button *ngFor="let field of row, let columnIndex = index" [class.filled]="field" class="field"
-            (click)="onBoardFieldClick(rowIndex, columnIndex)" [disabled]="field"></button>
+            (click)="onBoardFieldClick(rowIndex, columnIndex)" [disabled]="field || computerTurn"></button>
   </div>
 </div>

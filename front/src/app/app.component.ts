@@ -25,6 +25,8 @@ export class AppComponent {
   depths = [3, 3];
   myGameState: GameState;
 
+  computerTurn = false;
+
   constructor(private turnService: TurnService) {
     this.reset();
     this.sideSizeControl.valueChanges.subscribe(value => this.tryToUpdateSize(value));
@@ -41,6 +43,7 @@ export class AppComponent {
   }
 
   onBoardFieldClick(rowIndex: number, columnIndex: number) {
+    this.computerTurn = true;
     this.myGameState.board[rowIndex][columnIndex] = true;
     const data = new NewMove(this.myGameState, rowIndex, columnIndex);
     this.turnService.makeAMove(data).subscribe(gameState => this.updateState(gameState));
@@ -48,6 +51,7 @@ export class AppComponent {
 
   private updateState(gameState) {
     if (!gameState) {
+      this.computerTurn = false;
       return;
     }
     this.myGameState = gameState;
@@ -55,12 +59,15 @@ export class AppComponent {
   }
 
   tryToMakeAutoMove() {
+    this.computerTurn = true;
     const mode = this.selectedModes[this.playerIndex];
     if (mode != this.allModes[0]) {
       const stateHeuristics = this.selectedStateHeuristics[this.playerIndex];
       const depth = this.depths[this.playerIndex];
       const moveData = new AutoMove(this.myGameState, mode, stateHeuristics, depth);
       this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
+    } else {
+      this.computerTurn = false;
     }
   }
 
