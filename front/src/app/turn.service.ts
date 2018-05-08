@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {NewMove} from './new-move';
-import {GameState} from './game-state';
-import {AutoMove} from './auto-move';
+import {NewMove} from './dto/new-move';
+import {GameState} from './dto/game-state';
+import {AutoMove} from './dto/auto-move';
 
 @Injectable()
 export class TurnService {

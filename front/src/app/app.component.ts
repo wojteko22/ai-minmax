@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {NewMove} from './board/new-move';
-import {GameState} from './board/game-state';
-import {TurnService} from './board/turn.service';
-import {AutoMove} from './board/auto-move';
+import {NewMove} from './dto/new-move';
+import {GameState} from './dto/game-state';
+import {TurnService} from './turn.service';
+import {AutoMove} from './dto/auto-move';
 
 @Component({
   selector: 'app-root',
