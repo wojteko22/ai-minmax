@@ -1,4 +1,4 @@
-package com.example.minmax
+package com.example.minmax.logic
 
 typealias Board = List<List<Boolean>>
 typealias Points = List<Int>

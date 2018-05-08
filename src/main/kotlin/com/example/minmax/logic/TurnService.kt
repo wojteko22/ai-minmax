@@ -1,4 +1,4 @@
-package com.example.minmax
+package com.example.minmax.logic
 
 import com.example.minmax.dto.AutoMove
 import com.example.minmax.dto.GameState

@@ -1,4 +1,4 @@
-package com.example.minmax
+package com.example.minmax.logic
 
 class PointsCalculator(private val board: Board, private val rowIndex: Int, private val columnIndex: Int) {
 

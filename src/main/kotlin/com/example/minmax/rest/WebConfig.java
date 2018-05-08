@@ -1,4 +1,4 @@
-package com.example.minmax;
+package com.example.minmax.rest;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

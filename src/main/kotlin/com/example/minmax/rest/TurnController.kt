@@ -1,5 +1,6 @@
-package com.example.minmax
+package com.example.minmax.rest
 
+import com.example.minmax.logic.TurnService
 import com.example.minmax.dto.AutoMove
 import com.example.minmax.dto.NewMove
 import org.springframework.web.bind.annotation.PostMapping

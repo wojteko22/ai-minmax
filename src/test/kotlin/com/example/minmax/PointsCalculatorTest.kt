@@ -1,5 +1,6 @@
 package com.example.minmax
 
+import com.example.minmax.logic.PointsCalculator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
