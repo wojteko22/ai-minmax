@@ -21,6 +21,7 @@
       </mat-form-field>
     </div>
   </div>
+  <button (click)="reset()">Reset</button>
   <p>Turn of Player no. {{playerIndex + 1}} <button (click)="tryToMakeAutoMove()">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">

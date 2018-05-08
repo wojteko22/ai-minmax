@@ -23,9 +23,10 @@ export class AppComponent {
   selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[1]];
 
   depths = [3, 3];
-  myGameState = new GameState(this.sideSizeControl.value);
+  myGameState: GameState;
 
   constructor(private turnService: TurnService) {
+    this.reset();
     this.sideSizeControl.valueChanges.subscribe(value => this.tryToUpdateSize(value));
   }
 
@@ -33,6 +34,10 @@ export class AppComponent {
     if (this.sideSizeControl.valid) {
       this.myGameState = new GameState(size);
     }
+  }
+
+  reset() {
+    this.myGameState = new GameState(this.sideSizeControl.value);
   }
 
   onBoardFieldClick(rowIndex: number, columnIndex: number) {
