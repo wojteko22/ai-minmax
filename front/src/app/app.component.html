@@ -3,7 +3,7 @@
     Stratego
   </h1>
   <div class="playersBox">
-    <div *ngFor="let playerPoints of points, let index = index" class="playerData">
+    <div *ngFor="let playerPoints of myGameState.points, let index = index" class="playerData">
       <p>Player {{index + 1}}</p>
       <p>Points: {{playerPoints}}</p>
       <mat-form-field>
@@ -13,11 +13,11 @@
       </mat-form-field>
     </div>
   </div>
-  <p>Turn of Player no. {{playerIndex + 1}}</p>
+  <p>Turn of Player no. {{myGameState.playerIndex + 1}} <button (click)="makeAutoMove()">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
-  <div *ngFor="let row of board, let rowIndex = index">
+  <div *ngFor="let row of myGameState.board, let rowIndex = index">
     <button *ngFor="let field of row, let columnIndex = index" [class.filled]="field" class="field"
             (click)="onBoardFieldClick(rowIndex, columnIndex)" [disabled]="field"></button>
   </div>
