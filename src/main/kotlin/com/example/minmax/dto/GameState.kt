@@ -6,6 +6,7 @@ import com.example.minmax.logic.PointsCalculator
 import com.example.minmax.logic.updated
 
 class GameState(val board: Board, val points: Points, val playerIndex: Int) {
+
     val nextPlayerIndex = (playerIndex + 1) % 2
 
     fun updatedPoints(turnPoints: Int) = points.updated(turnPoints, playerIndex)

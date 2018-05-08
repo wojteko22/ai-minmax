@@ -2,16 +2,20 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-abstract class Algorithm(gameState: GameState, private val maxDepth: Int) {
+abstract class Algorithm(
+        gameState: GameState,
+        private val maxDepth: Int,
+        private val stateHeuristics: StateHeuristics
+) {
 
     protected val maxPlayerIndex: Int = gameState.playerIndex
+    private val minPlayerIndex = gameState.nextPlayerIndex
 
     protected fun returnValue(currentDepth: Int, gameState: GameState): Node? {
         if (currentDepth == 0) {
             return null
         }
-        val minPlayerIndex = (maxPlayerIndex + 1) % 2
-        val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
+        val value = stateHeuristics(gameState, maxPlayerIndex, minPlayerIndex)
         return Node(gameState, value)
     }
 

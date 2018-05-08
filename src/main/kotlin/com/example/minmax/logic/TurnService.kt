@@ -15,14 +15,18 @@ class TurnService {
     }
 
     fun makeAutoMove(data: AutoMove): GameState? {
+        val stateHeuristics: StateHeuristics = ::scoreDifference
         return when (data.mode) {
             "consecutive" -> {
                 val states = data.gameState.allAvailableStates()
                 states.firstOrNull()
             }
-            "points" -> MinMax(data.gameState, data.depth).bestState
-            "alpha-beta" -> AlphaBetaPruning(data.gameState, data.depth).bestState
+            "points" -> MinMax(data.gameState, data.depth, stateHeuristics).bestState
+            "alpha-beta" -> AlphaBetaPruning(data.gameState, data.depth, stateHeuristics).bestState
             else -> null
         }
     }
 }
+
+fun scoreDifference(gameState: GameState, maxPlayerIndex: Int, minPlayerIndex: Int) =
+        gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
