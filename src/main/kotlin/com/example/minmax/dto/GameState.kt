@@ -1,4 +1,9 @@
-package com.example.minmax
+package com.example.minmax.dto
+
+import com.example.minmax.Board
+import com.example.minmax.Points
+import com.example.minmax.PointsCalculator
+import com.example.minmax.updated
 
 class GameState(val board: Board, val points: Points, val playerIndex: Int) {
     val nextPlayerIndex = (playerIndex + 1) % 2

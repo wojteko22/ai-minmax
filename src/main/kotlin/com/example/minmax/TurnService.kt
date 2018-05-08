@@ -1,5 +1,8 @@
 package com.example.minmax
 
+import com.example.minmax.dto.AutoMove
+import com.example.minmax.dto.GameState
+import com.example.minmax.dto.NewMove
 import org.springframework.stereotype.Service
 
 @Service

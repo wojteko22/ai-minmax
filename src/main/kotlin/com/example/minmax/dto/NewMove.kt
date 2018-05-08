@@ -1,4 +1,4 @@
-package com.example.minmax
+package com.example.minmax.dto
 
 class NewMove(
         private val gameState: GameState,
