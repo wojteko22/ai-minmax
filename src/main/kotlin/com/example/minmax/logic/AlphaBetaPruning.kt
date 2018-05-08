@@ -2,26 +2,16 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-class AlphaBetaPruning(gameState: GameState) {
-
-    private val maxPlayerIndex: Int = gameState.playerIndex
+class AlphaBetaPruning(gameState: GameState): Algorithm(gameState) {
 
     val bestState = search(gameState, 0, Node(null, Int.MIN_VALUE), Node(null, Int.MAX_VALUE))?.state
 
     private fun search(gameState: GameState, currentDepth: Int, alpha: Node, beta: Node): Node? {
         val states = gameState.allAvailableStates()
-        if (currentDepth == 4 || states.isEmpty()) {
-            if (currentDepth == 0) {
-                return null
-            }
-            val minPlayerIndex = (maxPlayerIndex + 1) % 2
-            val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
-            return Node(gameState, value)
-        }
-        return if (gameState.playerIndex == maxPlayerIndex) {
-            maxNode(states, currentDepth, gameState, alpha, beta)
-        } else {
-            minNode(states, currentDepth, gameState, alpha, beta)
+        return when {
+            isLastLayer(currentDepth, states) -> returnValue(currentDepth, gameState)
+            gameState.playerIndex == maxPlayerIndex -> maxNode(states, currentDepth, gameState, alpha, beta)
+            else -> minNode(states, currentDepth, gameState, alpha, beta)
         }
     }
 

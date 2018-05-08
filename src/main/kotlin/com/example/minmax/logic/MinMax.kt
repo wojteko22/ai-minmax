@@ -2,26 +2,16 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-class MinMax(gameState: GameState) {
+class MinMax(gameState: GameState): Algorithm(gameState) {
 
-    private val maxPlayerIndex: Int = gameState.playerIndex
-
-    val bestState= minMax(gameState, 0)?.state
+    val bestState = minMax(gameState, 0)?.state
 
     private fun minMax(gameState: GameState, currentDepth: Int): Node? {
         val states = gameState.allAvailableStates()
-        if (currentDepth == 4 || states.isEmpty()) {
-            if (currentDepth == 0) {
-                return null
-            }
-            val minPlayerIndex = (maxPlayerIndex + 1) % 2
-            val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
-            return Node(gameState, value)
-        }
-        return if (gameState.playerIndex == maxPlayerIndex) {
-            node(states, currentDepth, gameState, ::max)
-        } else {
-            node(states, currentDepth, gameState, ::min)
+        return when {
+            isLastLayer(currentDepth, states) -> returnValue(currentDepth, gameState)
+            gameState.playerIndex == maxPlayerIndex -> node(states, currentDepth, gameState, ::max)
+            else -> node(states, currentDepth, gameState, ::min)
         }
     }
 
