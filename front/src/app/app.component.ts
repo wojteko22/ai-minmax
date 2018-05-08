@@ -13,10 +13,11 @@ import {AutoMove} from './dto/auto-move';
 })
 export class AppComponent {
   private validators = [Validators.required, Validators.min(2)];
-
+  two = Array(0, 1);
   sideSizeControl = new FormControl(4, Validators.compose(this.validators));
   allModes = ["human", "consecutive", "points", "alpha-beta"];
   selectedModes = [this.allModes[3], this.allModes[3]];
+  depths = [1, 1];
   myGameState = new GameState(this.sideSizeControl.value);
 
   constructor(private turnService: TurnService) {
@@ -40,13 +41,14 @@ export class AppComponent {
       return;
     }
     this.myGameState = gameState;
-    this.makeAutoMove();
+    this.tryToMakeAutoMove();
   }
 
-  makeAutoMove() {
+  tryToMakeAutoMove() {
     const mode = this.selectedModes[this.myGameState.playerIndex];
     if (mode != this.allModes[0]) {
-      const moveData = new AutoMove(this.myGameState, mode);
+      const depth = this.depths[this.myGameState.playerIndex];
+      const moveData = new AutoMove(this.myGameState, mode, depth);
       this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
     }
   }

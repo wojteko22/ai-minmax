@@ -3,17 +3,20 @@
     Stratego
   </h1>
   <div class="playersBox">
-    <div *ngFor="let playerPoints of myGameState.points, let index = index" class="playerData">
+    <div *ngFor="let index of two" class="playerData">
       <p>Player {{index + 1}}</p>
-      <p>Points: {{playerPoints}}</p>
+      <p>Points: {{myGameState.points[index]}}</p>
       <mat-form-field>
         <mat-select placeholder="Mode" [(value)]="selectedModes[index]">
           <mat-option *ngFor="let mode of allModes" [value]="mode">{{mode}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field>
+        <input type="number" min="1" matInput placeholder="Depth" [(ngModel)]="depths[index]">
+      </mat-form-field>
     </div>
   </div>
-  <p>Turn of Player no. {{myGameState.playerIndex + 1}} <button (click)="makeAutoMove()">Start</button></p>
+  <p>Turn of Player no. {{myGameState.playerIndex + 1}} <button (click)="tryToMakeAutoMove()">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>

@@ -4,6 +4,7 @@ export class AutoMove {
   constructor(
     public gameState: GameState,
     public mode: string,
+    public depth: number,
   ) {
   }
 }
