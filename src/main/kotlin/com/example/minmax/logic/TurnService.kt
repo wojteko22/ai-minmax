@@ -14,10 +14,5 @@ class TurnService {
         return GameState(data.board, updatedPoints, data.nextPlayerIndex)
     }
 
-    fun makeAutoMove(data: AutoMove): GameState? = when (data.mode) {
-        "consecutive" -> data.gameState.allAvailableStates().firstOrNull()
-        "points" -> MinMax(data.gameState, data.depth, data.stateHeuristics).bestState
-        "alpha-beta" -> AlphaBetaPruning(data.gameState, data.depth, data.stateHeuristics).bestState
-        else -> null
-    }
+    fun makeAutoMove(autoMove: AutoMove): GameState? = autoMove.makeMove()
 }
