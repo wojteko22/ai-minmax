@@ -12,11 +12,16 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
+        <mat-select placeholder="State heuristics" [(value)]="selectedStateHeuristics[index]">
+          <mat-option *ngFor="let heuristics of allStateHeuristics" [value]="heuristics">{{heuristics}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
         <input type="number" min="1" matInput placeholder="Depth" [(ngModel)]="depths[index]">
       </mat-form-field>
     </div>
   </div>
-  <p>Turn of Player no. {{myGameState.playerIndex + 1}} <button (click)="tryToMakeAutoMove()">Start</button></p>
+  <p>Turn of Player no. {{playerIndex + 1}} <button (click)="tryToMakeAutoMove()">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
