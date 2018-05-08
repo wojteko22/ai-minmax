@@ -17,7 +17,7 @@ export class AppComponent {
   sideSizeControl = new FormControl(4, Validators.compose(this.validators));
   points = [0, 0];
   allModes = ["human", "consecutive", "points", "alpha-beta"];
-  selectedModes = [this.allModes[0], this.allModes[0]];
+  selectedModes = [this.allModes[3], this.allModes[3]];
   playerIndex = 0;
   board: Array<Array<boolean>>;
 

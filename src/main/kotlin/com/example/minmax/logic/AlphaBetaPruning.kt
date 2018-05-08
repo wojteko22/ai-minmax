@@ -11,6 +11,9 @@ class AlphaBetaPruning(gameState: GameState) {
     private fun search(gameState: GameState, currentDepth: Int, alpha: Node, beta: Node): Node? {
         val states = gameState.allAvailableStates()
         if (currentDepth == 4 || states.isEmpty()) {
+            if (currentDepth == 0) {
+                return null
+            }
             val minPlayerIndex = (maxPlayerIndex + 1) % 2
             val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
             return Node(gameState, value)
