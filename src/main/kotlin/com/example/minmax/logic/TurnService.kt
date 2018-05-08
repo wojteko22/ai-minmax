@@ -4,6 +4,7 @@ import com.example.minmax.dto.AutoMove
 import com.example.minmax.dto.GameState
 import com.example.minmax.dto.NewMove
 import org.springframework.stereotype.Service
+import kotlin.system.measureTimeMillis
 
 @Service
 class TurnService {
@@ -14,5 +15,12 @@ class TurnService {
         return GameState(data.board, updatedPoints, data.nextPlayerIndex)
     }
 
-    fun makeAutoMove(autoMove: AutoMove): GameState? = autoMove.makeMove()
+    fun makeAutoMove(autoMove: AutoMove): GameState? {
+        var newState: GameState? = null
+        val timeInMillis = measureTimeMillis {
+            newState = autoMove.makeMove()
+        }
+        println("$autoMove: $timeInMillis")
+        return newState
+    }
 }

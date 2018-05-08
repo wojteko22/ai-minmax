@@ -26,8 +26,10 @@ class AutoMove(
 
     fun makeMove(): GameState? = when (mode) {
         "consecutive" -> gameState.allAvailableStates().firstOrNull()
-        "points" -> MinMax(gameState, depth, stateHeuristics).bestState
+        "min-max" -> MinMax(gameState, depth, stateHeuristics).bestState
         "alpha-beta" -> AlphaBetaPruning(gameState, depth, stateHeuristics).bestState
         else -> null
     }
+
+    override fun toString(): String = mode
 }
