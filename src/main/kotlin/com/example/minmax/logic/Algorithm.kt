@@ -2,7 +2,7 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-abstract class Algorithm(gameState: GameState) {
+abstract class Algorithm(gameState: GameState, private val maxDepth: Int) {
 
     protected val maxPlayerIndex: Int = gameState.playerIndex
 
@@ -16,5 +16,5 @@ abstract class Algorithm(gameState: GameState) {
     }
 
     protected fun isLastLayer(currentDepth: Int, states: List<GameState>) =
-            currentDepth == 4 || states.isEmpty()
+            currentDepth == maxDepth || states.isEmpty()
 }

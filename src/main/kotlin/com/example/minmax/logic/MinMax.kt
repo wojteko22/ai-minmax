@@ -2,7 +2,7 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-class MinMax(gameState: GameState): Algorithm(gameState) {
+class MinMax(gameState: GameState, maxDepth: Int): Algorithm(gameState, maxDepth) {
 
     val bestState = minMax(gameState, 0)?.state
 

@@ -20,8 +20,8 @@ class TurnService {
                 val states = data.gameState.allAvailableStates()
                 states.firstOrNull()
             }
-            "points" -> MinMax(data.gameState).bestState
-            "alpha-beta" -> AlphaBetaPruning(data.gameState).bestState
+            "points" -> MinMax(data.gameState, data.depth).bestState
+            "alpha-beta" -> AlphaBetaPruning(data.gameState, data.depth).bestState
             else -> null
         }
     }

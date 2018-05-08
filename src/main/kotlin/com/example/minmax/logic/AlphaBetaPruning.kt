@@ -2,7 +2,7 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-class AlphaBetaPruning(gameState: GameState): Algorithm(gameState) {
+class AlphaBetaPruning(gameState: GameState, maxDepth: Int): Algorithm(gameState, maxDepth) {
 
     val bestState = search(gameState, 0, Node(null, Int.MIN_VALUE), Node(null, Int.MAX_VALUE))?.state
 
