@@ -12,30 +12,39 @@ class TurnService {
     }
 
     fun makeAutoMove(data: AutoMove): GameState? {
-        val states = allAvailableStates(data)
         return when (data.mode) {
-            "consecutive" -> states.firstOrNull()
-            "points" -> states.maxBy { it.points[data.playerIndex] }
+            "consecutive" -> {
+                val states = data.gameState.allAvailableStates()
+                states.firstOrNull()
+            }
+            "points" -> minMax(data.gameState, data.playerIndex, 0)?.state
             else -> null
         }
     }
 
-    private fun allAvailableStates(data: AutoMove): List<GameState> {
-        val board = data.board
-        val states = mutableListOf<GameState>()
-        for (rowIndex in 0 until board.size) {
-            for (columnIndex in 0 until board.size) {
-                if (!board[rowIndex][columnIndex]) {
-                    val currentBoard = board.map { it.toMutableList() }
-                    currentBoard[rowIndex][columnIndex] = true
-                    val pointsGain = PointsCalculator(currentBoard, rowIndex, columnIndex).points
-                    val nextPlayerIndex = data.nextPlayerIndex
-                    val updatedPoints = data.updatedPoints(pointsGain)
-                    val gameState = GameState(currentBoard, updatedPoints, nextPlayerIndex)
-                    states += gameState
-                }
+    fun minMax(gameState: GameState, maxPlayerIndex: Int, depth: Int): Node? {
+        val states = gameState.allAvailableStates()
+        if (depth == 2 || states.isEmpty()) {
+            val minPlayerIndex = (maxPlayerIndex + 1) % 2
+            val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
+            return Node(gameState, value)
+        }
+        return if (gameState.playerIndex == maxPlayerIndex) {
+            val bestChild = states.map { minMax(it, maxPlayerIndex, depth + 1)!! }.maxBy { it.value }!!
+            if (depth == 0) {
+                bestChild
+            } else {
+                Node(gameState, bestChild.value)
+            }
+        } else {
+            val bestChild = states.map { minMax(it, maxPlayerIndex, depth + 1)!! }.minBy { it.value }!!
+            if (depth == 0) {
+                bestChild
+            } else {
+                Node(gameState, bestChild.value)
             }
         }
-        return states
     }
+
+    class Node(val state: GameState, val value: Int)
 }
