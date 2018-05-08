@@ -16,8 +16,8 @@ export class AppComponent {
   two = Array(0, 1);
   sideSizeControl = new FormControl(4, Validators.compose(this.validators));
 
-  allModes = ['human', 'consecutive', 'min-max', 'alpha-beta'];
-  selectedModes = [this.allModes[3], this.allModes[3]];
+  allModes = ['human', 'min-max', 'alpha-beta'];
+  selectedModes = [this.allModes[2], this.allModes[2]];
 
   allStateHeuristics = ['points-advantage', 'points-player-max', 'points-opponent-min'];
   selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[1]];

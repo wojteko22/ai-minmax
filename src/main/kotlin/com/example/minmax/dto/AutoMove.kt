@@ -25,7 +25,6 @@ class AutoMove(
     }
 
     fun makeMove(): GameState? = when (mode) {
-        "consecutive" -> gameState.allAvailableStates().firstOrNull()
         "min-max" -> MinMax(gameState, depth, stateHeuristics).bestState
         "alpha-beta" -> AlphaBetaPruning(gameState, depth, stateHeuristics).bestState
         else -> null
