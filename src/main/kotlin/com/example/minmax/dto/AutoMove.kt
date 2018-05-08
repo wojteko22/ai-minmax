@@ -12,11 +12,14 @@ class AutoMove(
 ) {
 
     private val stateHeuristics: StateHeuristics = when (stateHeuristicsName) {
-        "points-advantage" -> { gameState, maxPlayerIndex, minPlayerIndex: Int ->
+        "points-advantage" -> { gameState, maxPlayerIndex, minPlayerIndex ->
             gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
         }
-        "points-player-max" -> { gameState, maxPlayerIndex, _: Int ->
+        "points-player-max" -> { gameState, maxPlayerIndex, _ ->
             gameState.points[maxPlayerIndex]
+        }
+        "points-opponent-min" -> { gameState, _, minPlayerIndex ->
+            -gameState.points[minPlayerIndex]
         }
         else -> throw NoSuchElementException("No such heuristics")
     }

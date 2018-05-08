@@ -19,7 +19,7 @@ export class AppComponent {
   allModes = ['human', 'consecutive', 'points', 'alpha-beta'];
   selectedModes = [this.allModes[3], this.allModes[3]];
 
-  allStateHeuristics = ['points-advantage', 'points-player-max'];
+  allStateHeuristics = ['points-advantage', 'points-player-max', 'points-opponent-min'];
   selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[1]];
 
   depths = [3, 3];
