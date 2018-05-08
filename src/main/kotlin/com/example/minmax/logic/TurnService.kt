@@ -21,6 +21,7 @@ class TurnService {
                 states.firstOrNull()
             }
             "points" -> MinMax(data.gameState).bestState
+            "alpha-beta" -> AlphaBetaPruning(data.gameState).bestState
             else -> null
         }
     }

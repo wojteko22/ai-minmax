@@ -10,7 +10,7 @@ class MinMax(gameState: GameState) {
 
     private fun minMax(gameState: GameState, currentDepth: Int): Node? {
         val states = gameState.allAvailableStates()
-        if (currentDepth == 2 || states.isEmpty()) {
+        if (currentDepth == 4 || states.isEmpty()) {
             val minPlayerIndex = (maxPlayerIndex + 1) % 2
             val value = gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
             return Node(gameState, value)
