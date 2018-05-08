@@ -14,13 +14,16 @@ import {AutoMove} from './dto/auto-move';
 export class AppComponent {
   private validators = [Validators.required, Validators.min(2)];
   two = Array(0, 1);
-  sideSizeControl = new FormControl(4, Validators.compose(this.validators));
+  sideSizeControl = new FormControl(7, Validators.compose(this.validators));
 
   allModes = ['human', 'min-max', 'alpha-beta'];
   selectedModes = [this.allModes[2], this.allModes[2]];
 
   allStateHeuristics = ['points-advantage', 'points-player-max', 'points-opponent-min'];
-  selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[1]];
+  selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[0]];
+
+  allNodeHeuristics = ['consecutive', 'max-points-advantage', 'min-points-advantage'];
+  selectedNodeHeuristics = [this.allNodeHeuristics[0], this.allNodeHeuristics[0]];
 
   depths = [3, 3];
   myGameState: GameState;
@@ -63,8 +66,9 @@ export class AppComponent {
     const mode = this.selectedModes[this.playerIndex];
     if (mode != this.allModes[0]) {
       const stateHeuristics = this.selectedStateHeuristics[this.playerIndex];
+      const nodeHeuristics = this.selectedNodeHeuristics[this.playerIndex];
       const depth = this.depths[this.playerIndex];
-      const moveData = new AutoMove(this.myGameState, mode, stateHeuristics, depth);
+      const moveData = new AutoMove(this.myGameState, mode, stateHeuristics, nodeHeuristics, depth);
       this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
     } else {
       this.computerTurn = false;

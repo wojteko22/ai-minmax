@@ -2,8 +2,21 @@ package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
 
-class AlphaBetaPruning(gameState: GameState, maxDepth: Int, stateHeuristics: StateHeuristics) :
-        Algorithm(gameState, maxDepth, stateHeuristics) {
+class AlphaBetaPruning(
+        gameState: GameState,
+        maxDepth: Int,
+        stateHeuristics: StateHeuristics,
+        nodeHeuristicsName: String
+) : Algorithm(gameState, maxDepth, stateHeuristics) {
+
+    private val customNodesIterator: (list: List<GameState>) -> Iterator<GameState> = {
+        when (nodeHeuristicsName) {
+            "consecutive" -> it.iterator()
+            "max-points-advantage" -> advantageMaxIterator(it)
+            "min-points-advantage" -> advantageMinIterator(it)
+            else -> throw NoSuchElementException("No such node heuristics")
+        }
+    }
 
     val bestState = search(gameState, 0, Node(null, Int.MIN_VALUE), Node(null, Int.MAX_VALUE))?.state
 
@@ -24,7 +37,7 @@ class AlphaBetaPruning(gameState: GameState, maxDepth: Int, stateHeuristics: Sta
             beta: Node
     ): Node {
         var currentAlpha = alpha
-        states.forEach {
+        customNodesIterator(states).forEach {
             val score = search(it, currentDepth + 1, currentAlpha, beta)!!
             if (score.value > currentAlpha.value) {
                 currentAlpha = score
@@ -48,7 +61,7 @@ class AlphaBetaPruning(gameState: GameState, maxDepth: Int, stateHeuristics: Sta
             beta: Node
     ): Node {
         var currentBeta = beta
-        states.forEach {
+        customNodesIterator(states).forEach {
             val score = search(it, currentDepth + 1, alpha, currentBeta)!!
             if (score.value < currentBeta.value) {
                 currentBeta = score
@@ -58,5 +71,13 @@ class AlphaBetaPruning(gameState: GameState, maxDepth: Int, stateHeuristics: Sta
             }
         }
         return Node(gameState, currentBeta.value)
+    }
+
+    private fun advantageMaxIterator(list: List<GameState>) = StatesIterator(list) {
+        maxBy { pointsAdvantage(it, maxPlayerIndex, minPlayerIndex) }!!
+    }
+
+    private fun advantageMinIterator(list: List<GameState>) = StatesIterator(list) {
+        minBy { pointsAdvantage(it, maxPlayerIndex, minPlayerIndex) }!!
     }
 }

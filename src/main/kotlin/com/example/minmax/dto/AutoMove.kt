@@ -3,18 +3,18 @@ package com.example.minmax.dto
 import com.example.minmax.logic.AlphaBetaPruning
 import com.example.minmax.logic.MinMax
 import com.example.minmax.logic.StateHeuristics
+import com.example.minmax.logic.pointsAdvantage
 
 class AutoMove(
         private val gameState: GameState,
         private val mode: String,
         stateHeuristicsName: String,
+        private val nodeHeuristicsName: String,
         private val depth: Int
 ) {
 
     private val stateHeuristics: StateHeuristics = when (stateHeuristicsName) {
-        "points-advantage" -> { gameState, maxPlayerIndex, minPlayerIndex ->
-            gameState.points[maxPlayerIndex] - gameState.points[minPlayerIndex]
-        }
+        "points-advantage" -> pointsAdvantage
         "points-player-max" -> { gameState, maxPlayerIndex, _ ->
             gameState.points[maxPlayerIndex]
         }
@@ -26,9 +26,9 @@ class AutoMove(
 
     fun makeMove(): GameState? = when (mode) {
         "min-max" -> MinMax(gameState, depth, stateHeuristics).bestState
-        "alpha-beta" -> AlphaBetaPruning(gameState, depth, stateHeuristics).bestState
+        "alpha-beta" -> AlphaBetaPruning(gameState, depth, stateHeuristics, nodeHeuristicsName).bestState
         else -> null
     }
 
-    override fun toString(): String = mode
+    override fun toString(): String = "$mode $nodeHeuristicsName:"
 }

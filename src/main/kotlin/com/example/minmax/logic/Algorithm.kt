@@ -9,7 +9,7 @@ abstract class Algorithm(
 ) {
 
     protected val maxPlayerIndex: Int = gameState.playerIndex
-    private val minPlayerIndex = gameState.nextPlayerIndex
+    protected val minPlayerIndex = gameState.nextPlayerIndex
 
     protected fun returnValue(currentDepth: Int, gameState: GameState): Node? {
         if (currentDepth == 0) {

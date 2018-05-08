@@ -17,6 +17,11 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
+        <mat-select placeholder="Node heuristics" [(value)]="selectedNodeHeuristics[index]">
+          <mat-option *ngFor="let heuristics of allNodeHeuristics" [value]="heuristics">{{heuristics}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
         <input type="number" min="1" matInput placeholder="Depth" [(ngModel)]="depths[index]">
       </mat-form-field>
     </div>

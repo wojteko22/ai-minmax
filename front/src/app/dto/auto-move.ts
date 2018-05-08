@@ -5,6 +5,7 @@ export class AutoMove {
     public gameState: GameState,
     public mode: string,
     public stateHeuristicsName: string,
+    public nodeHeuristicsName: string,
     public depth: number,
   ) {
   }
