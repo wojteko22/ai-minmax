@@ -25,7 +25,7 @@ export class AppComponent {
 
   private tryToUpdateSize(size: number) {
     if (this.sideSizeControl.valid) {
-      this.myGameState.createBoard(size);
+      this.myGameState = new GameState(size);
     }
   }
 
@@ -40,14 +40,14 @@ export class AppComponent {
       return;
     }
     this.myGameState = gameState;
-    const mode = this.selectedModes[this.myGameState.playerIndex];
-    if (mode != this.allModes[0]) {
-      const moveData = new AutoMove(gameState, mode);
-      this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
-    }
+    this.makeAutoMove();
   }
 
   makeAutoMove() {
-
+    const mode = this.selectedModes[this.myGameState.playerIndex];
+    if (mode != this.allModes[0]) {
+      const moveData = new AutoMove(this.myGameState, mode);
+      this.turnService.makeAutoMove(moveData).subscribe(gameState => this.updateState(gameState));
+    }
   }
 }

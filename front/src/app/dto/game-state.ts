@@ -8,7 +8,7 @@ export class GameState {
     this.createBoard(boardSize);
   }
 
-  createBoard(size: number) {
+  private createBoard(size: number) {
     this.board = Array(size);
     for (let i = 0; i < this.board.length; i++) {
       this.board[i] = Array(size).fill(false);
