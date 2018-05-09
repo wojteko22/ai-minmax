@@ -26,8 +26,8 @@
       </mat-form-field>
     </div>
   </div>
-  <button (click)="reset()" [disabled]="computerTurn">Reset</button>
-  <p>Turn of Player no. {{playerIndex + 1}} <button (click)="tryToMakeAutoMove()" [disabled]="computerTurn">Start</button></p>
+  <button mat-raised-button color="warn" (click)="reset()" [disabled]="computerTurn">Reset</button>
+  <p>Turn of Player no. {{playerIndex + 1}} <button mat-raised-button color="primary" (click)="tryToMakeAutoMove()" [disabled]="computerTurn">Start</button></p>
   <mat-form-field>
     <input type="number" min="2" matInput placeholder="Side size" [formControl]="sideSizeControl">
   </mat-form-field>
