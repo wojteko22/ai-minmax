@@ -10,11 +10,30 @@ class AlphaBetaPruning(
         nodeHeuristicsName: String
 ) : Algorithm(gameState, maxDepth, stateHeuristics) {
 
-    private val customNodesIterator: (list: List<GameState>) -> Iterator<GameState> = {
+    private val maxNodeIterator: (list: List<GameState>) -> Iterator<GameState>
+    private val minNodeIterator: (list: List<GameState>) -> Iterator<GameState>
+
+    init {
         when (nodeHeuristicsName) {
-            NodeHeuristics.Consecutive.value -> it.iterator()
-            NodeHeuristics.Max.value -> advantageMaxIterator(it)
-            NodeHeuristics.Min.value -> advantageMinIterator(it)
+            NodeHeuristics.Consecutive.value -> {
+                val iterator: (list: List<GameState>) -> Iterator<GameState> = { it.iterator() }
+                maxNodeIterator = iterator
+                minNodeIterator = iterator
+            }
+            NodeHeuristics.Max.value -> {
+                val iterator: (list: List<GameState>) -> Iterator<GameState> = { advantageMaxIterator(it) }
+                maxNodeIterator = iterator
+                minNodeIterator = iterator
+            }
+            NodeHeuristics.Min.value -> {
+                val iterator: (list: List<GameState>) -> Iterator<GameState> = { advantageMinIterator(it) }
+                maxNodeIterator = iterator
+                minNodeIterator = iterator
+            }
+            NodeHeuristics.MaxMin.value -> {
+                maxNodeIterator = { advantageMaxIterator(it) }
+                minNodeIterator = { advantageMinIterator(it) }
+            }
             else -> throw NoSuchElementException("No such node heuristics")
         }
     }
@@ -38,7 +57,7 @@ class AlphaBetaPruning(
             beta: Node
     ): Node {
         var currentAlpha = alpha
-        customNodesIterator(states).forEach {
+        maxNodeIterator(states).forEach {
             val score = search(it, currentDepth + 1, currentAlpha, beta)!!
             if (score.value > currentAlpha.value) {
                 currentAlpha = score
@@ -62,7 +81,7 @@ class AlphaBetaPruning(
             beta: Node
     ): Node {
         var currentBeta = beta
-        customNodesIterator(states).forEach {
+        minNodeIterator(states).forEach {
             val score = search(it, currentDepth + 1, alpha, currentBeta)!!
             if (score.value < currentBeta.value) {
                 currentBeta = score

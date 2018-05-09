@@ -22,7 +22,7 @@ export class AppComponent {
   allStateHeuristics = ['points-advantage', 'points-player-max', 'points-opponent-min'];
   selectedStateHeuristics = [this.allStateHeuristics[0], this.allStateHeuristics[0]];
 
-  allNodeHeuristics = ['consecutive', 'max-points-advantage', 'min-points-advantage'];
+  allNodeHeuristics = ['consecutive', 'max-points-advantage', 'min-points-advantage', 'combined'];
   selectedNodeHeuristics = [this.allNodeHeuristics[0], this.allNodeHeuristics[0]];
 
   depths = [3, 3];
