@@ -1,6 +1,7 @@
 package com.example.minmax.logic
 
 import com.example.minmax.dto.GameState
+import com.example.minmax.logic.string.NodeHeuristics
 
 class AlphaBetaPruning(
         gameState: GameState,
@@ -11,9 +12,9 @@ class AlphaBetaPruning(
 
     private val customNodesIterator: (list: List<GameState>) -> Iterator<GameState> = {
         when (nodeHeuristicsName) {
-            "consecutive" -> it.iterator()
-            "max-points-advantage" -> advantageMaxIterator(it)
-            "min-points-advantage" -> advantageMinIterator(it)
+            NodeHeuristics.Consecutive.value -> it.iterator()
+            NodeHeuristics.Max.value -> advantageMaxIterator(it)
+            NodeHeuristics.Min.value -> advantageMinIterator(it)
             else -> throw NoSuchElementException("No such node heuristics")
         }
     }
